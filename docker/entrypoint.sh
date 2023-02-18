@@ -4,7 +4,8 @@ cd /IYUU
 
 if [[ ! -d .git ]]; then
     #git clone https://github.com/ledccn/IYUUPlus.git /tmp/IYUU
-    git clone https://gitee.com/ledc/iyuuplus.git /tmp/IYUU
+    # git clone https://gitee.com/ledc/iyuuplus.git /tmp/IYUU
+    git clone https://github.com/BigUncle/IYUUPlus.git /tmp/IYUU
     find /tmp/IYUU -mindepth 1 -maxdepth 1 | xargs -I {} cp -r {} /IYUU
     rm -rf /tmp/IYUU
 else
@@ -23,6 +24,7 @@ if [[ -z "${CRON_UPDATE}" ]]; then
     hour_interval=$(($RANDOM % 4 + 6))
     CRON_UPDATE="${minute} ${hour_start}-23/${hour_interval} * * *"
 fi
+alias 'll=ls -al'
 
 echo "设置cron..."
 echo "${CRON_UPDATE} cd /IYUU && git fetch --all && git reset --hard origin/master && git pull && php start.php restart -d" | crontab -
